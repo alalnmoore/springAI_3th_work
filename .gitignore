@@ -1,0 +1,138 @@
+# =====================
+# Java 相关
+# =====================
+*.class
+*.jar
+*.war
+*.ear
+*.nar
+hs_err_pid*
+replay_pid*
+
+# =====================
+# Maven
+# =====================
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+# =====================
+# Gradle (备用，万一以后切换)
+# =====================
+.gradle/
+build/
+gradle-app.setting
+!gradle-wrapper.jar
+
+# =====================
+# Spring Boot
+# =====================
+# 编译输出
+*.original
+# 日志
+*.log
+logs/
+# 本地开发配置（包含敏感信息如 API key 时，建议放到 application-local.yml）
+# application-local.yml
+# application-dev.yml
+
+# =====================
+# IDE - IntelliJ IDEA
+# =====================
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+.idea_modules/
+
+# =====================
+# IDE - Eclipse / STS
+# =====================
+.classpath
+.project
+.settings/
+.factorypath
+.springBeans
+.sts4-cache/
+
+# =====================
+# IDE - VS Code
+# =====================
+.vscode/
+.history/
+*.code-workspace
+
+# =====================
+# IDE - NetBeans
+# =====================
+nbproject/private/
+nbbuild/
+nbdist/
+.nb-gradle/
+
+# =====================
+# 操作系统
+# =====================
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+# Linux
+*~
+.fuse_hidden*
+.directory
+
+# =====================
+# Spring AI 特定 - 密钥 / 凭证
+# =====================
+# 严格避免提交 AI 服务商的 API 密钥、向量数据库凭证等敏感信息
+*.pem
+*.p12
+*.jks
+*.keystore
+*.truststore
+# 包含密钥的本地配置
+application-secret.yml
+application-secret.properties
+application-local.yml
+application-local.properties
+.env
+.env.local
+
+# =====================
+# 向量数据库本地数据
+# =====================
+# ElasticSearch / Redis / Chroma 等本地运行数据
+data/
+elasticsearch/
+redis/
+chroma/
+
+# =====================
+# 文档临时
+# =====================
+~$*
+*.tmp
+*.bak
+*.swp
+
+# =====================
+# 包文件 / 缓存
+# =====================
+*.pid
+*.pid.lock
+node_modules/
+.cache/

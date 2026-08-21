@@ -1,29 +1,49 @@
+server:
+  port: 8080
 spring:
   application:
     name: spring-ai
+
+  # ===== ES 连接配置（spring 下，与 ai 平级） =====
+  elasticsearch:
+    uris: http://192.168.74.100:9200
+
   ai:
-    openai:
-      # 访问模型地址
-      base-url: https://api.deepseek.com
-      # 访问模型的秘钥，也就是身份证明
-      api-key: ${Deepseek_Key}
+    model:
+      chat: ollama  #clint
+
+
+   #这个注释的原因是因为，我用的是本地ollama，所以不需要openai的key！！！！
+#    openai:
+#      base-url: https://api.deepseek.com
+#      api-key: ${Deepseek_Key}
+#      chat:
+#        options:
+#          model: deepseek-v4-flash
+#      embedding:
+#        enabled: false   # ← 关键！禁用 OpenAi 的 Embedding
+
+    # ===== 本地 Ollama（Chat + Embedding） =====
+    # 注意：Spring AI 1.0.0 中 Ollama embedding 不需要 enabled: true，
+    # 只要引入了 spring-ai-starter-model-ollama 并配置 model 即可自动启用
+    ollama:
+      base-url: http://127.0.0.1:11434
+      #这个是我本地ollama的LLM模型
       chat:
         options:
-          # 模型名称
-          model: deepseek-v4-flash
+          model: qwen2.5:3b
+          #这个是bge-m3的向量模型，就是将内容转化为向量，1024维的向量
       embedding:
         options:
-          model: text-embedding-v3 # embedding模型的名称
-          dimensions: 1024 # 生成的向量维数
-        vectorstore:
-          elasticsearch:
-            index-name: spring-ai-docs
-            dimensions: 1024
-            initialize-schema: true # 自动创建索引
+          model: bge-m3
 
-        elasticsearch:
-          uris: http://192.168.74.100:9200
+    # ===== 向量存储（ai 下，与 openai/ollama 平级） =====
+    vectorstore:
+      elasticsearch:
+        index-name: library-assistant
+        dimensions: 1024
+        initialize-schema: true
+
 logging:
   level:
-    # 指定SimpleLoggerAdvisor日志输出级别
     org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor: DEBUG

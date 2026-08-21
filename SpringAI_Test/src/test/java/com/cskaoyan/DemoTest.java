@@ -6,20 +6,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-public class SpringAiTest {
+public class DemoTest {
 
     @Autowired
-    private ChatClient chatClient;
+    ChatClient chatClient;
 
     @Test
     public void testChatClient() {
+
         String content = chatClient.prompt()
-                .system("你是一名温柔的老师")
-                .user("你好，我想家了")
+                .user("你好呀？？")
                 .call()
                 .content();
-        System.out.println(content);
-
+        System.out.println("content = " + content);
     }
-
 }

@@ -37,7 +37,7 @@ public class ForgivenessGameService {
         if(id == null || id.isEmpty()){
             id = UUID.randomUUID().toString();
         }
-        // 使用 final 变量承接，避免 lambda 引用报错
+        //会话的id使用 final 变量承接，避免 lambda 引用报错
         final String conversationId = id;
         //从map中获取当前女友的情绪分数
         int currentNum = forgivenessMap.getOrDefault(conversationId,INITIAL_EMOTION_SCORE);

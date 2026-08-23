@@ -1,0 +1,32 @@
+server:
+  port: 8081
+spring:
+  servlet:
+    multipart:
+      max-file-size: 20MB
+  ai:
+    model:
+      chat: openai
+    openai:
+      # 访问模型地址
+      base-url: https://api.deepseek.com
+      # 访问模型的秘钥，也就是身份证明
+      api-key: ${Deepseek_Key}
+      chat:
+        options:
+          model: deepseek-v4-flash-vision-exp
+          # 模型名称
+#
+#    mcp:
+#      client:
+#        stdio:
+#          servers-configuration: classpath:mcp-servers/servers.json  # MCP Server 配置文件路径
+#        sse:
+#          connections:
+#            time-mcp-server: # 给这个 Server 起个名字
+#              url: http://localhost:9002 # Server 的访问地址（如果 Server 在远程机器上就改成对应 IP）
+#    ollama:
+#      base-url: http://192.168.150.109:11434    # Ollama 服务地址，改为你部署 Ollama 的机器 IP
+#      chat:
+#        options:
+#          model: qwen2.5:0.5b

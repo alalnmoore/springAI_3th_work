@@ -3,14 +3,16 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>3.4.6</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath/>
     </parent>
+
     <groupId>com.cskaoyan</groupId>
-    <artifactId>SpringAI_Test</artifactId>
+    <artifactId>SpringAI_Multimodal</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
@@ -20,8 +22,9 @@
         <spring-ai.version>1.0.0</spring-ai.version>
 
     </properties>
-    <dependencyManagement>
 
+
+    <dependencyManagement>
         <dependencies>
             <!-- Spring AI BOM：统一管理 Spring AI 相关依赖版本 -->
             <dependency>
@@ -33,6 +36,7 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -74,10 +78,10 @@
         </dependency>
 
         <!-- 访问ollama部署的模型 -->
-        <dependency>
-            <groupId>org.springframework.ai</groupId>
-            <artifactId>spring-ai-starter-model-ollama</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.ai</groupId>-->
+<!--            <artifactId>spring-ai-starter-model-ollama</artifactId>-->
+<!--        </dependency>-->
 
         <!--  QuestionAnswerAdvisor -->
         <dependency>
@@ -86,16 +90,5 @@
         </dependency>
 
     </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
-
-
 
 </project>

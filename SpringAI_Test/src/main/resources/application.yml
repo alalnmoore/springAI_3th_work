@@ -10,18 +10,22 @@ spring:
 
   ai:
     model:
-      chat: ollama  #clint
+      chat: openai  #clint
+      embedding: ollama
 
 
-   #这个注释的原因是因为，我用的是本地ollama，所以不需要openai的key！！！！
-#    openai:
-#      base-url: https://api.deepseek.com
-#      api-key: ${Deepseek_Key}
-#      chat:
-#        options:
-#          model: deepseek-v4-flash
-#      embedding:
-#        enabled: false   # ← 关键！禁用 OpenAi 的 Embedding
+    # DeepSeek 兼容 OpenAI 协议，只用于 Chat
+    # embedding 由 ollama 提供，已通过 spring.ai.model.embedding=ollama 切换
+    openai:
+      base-url: https://api.deepseek.com
+      api-key: ${Deepseek_Key}
+      chat:
+        options:
+          model: deepseek-v4-flash
+    mcp:
+      client:
+        stdio:
+          servers-configuration: classpath:mcp-servers/servers.json  # MCP Server 配置文件路径
 
     # ===== 本地 Ollama（Chat + Embedding） =====
     # 注意：Spring AI 1.0.0 中 Ollama embedding 不需要 enabled: true，

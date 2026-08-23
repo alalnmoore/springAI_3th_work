@@ -5,11 +5,13 @@ import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
 import org.springframework.ai.chat.memory.ChatMemory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 public class OllamaTest {
     @Autowired
+    @Qualifier("CommonchatClient")
     private ChatClient chatClient;
     @Autowired
     private ChatMemory chatMemory;

@@ -7,21 +7,22 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-public class SpringAiTest {
+public class MCPtest {
 
     @Autowired
-    @Qualifier("CommonchatClient")
-    private ChatClient chatClient;
+    @Qualifier("mcpChatClient")
+    ChatClient chatClient;
 
     @Test
-    public void testChatClient() {
+    public void testToolCallbackProvider() {
+
         String content = chatClient.prompt()
-                .system("你是一名温柔的老师")
-                .user("你好，我想家了")
+                .user("请帮我查一下 IP地址117.253.50.2对应的城市是哪个")
                 .call()
                 .content();
-        System.out.println(content);
+
+        System.out.println("content = " + content);
+
 
     }
-
 }

@@ -10,6 +10,7 @@ import org.springframework.ai.transformer.splitter.TokenTextSplitter;
 import org.springframework.ai.vectorstore.SearchRequest;
 import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
@@ -63,6 +64,7 @@ public class RagTest {
     }
 
     @Autowired
+    @Qualifier("CommonchatClient")
     ChatClient chatClient;
     @Autowired
     ChatMemory chatMemory;
@@ -84,6 +86,7 @@ public class RagTest {
         System.out.println("content = " + content);
 
     }
+
     @Test
     public void testChat2() {
         QuestionAnswerAdvisor answerAdvisor = QuestionAnswerAdvisor.builder(vectorStore)

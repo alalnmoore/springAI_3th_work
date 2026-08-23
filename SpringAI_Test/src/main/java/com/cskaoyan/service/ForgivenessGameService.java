@@ -7,6 +7,7 @@ import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
 import org.springframework.ai.chat.memory.ChatMemory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -20,6 +21,7 @@ import java.util.regex.Pattern;
 public class ForgivenessGameService {
 
     @Autowired
+    @Qualifier("CommonchatClient")
     private ChatClient chatClient;
     @Autowired
     private MessageChatMemoryAdvisor messageChatMemoryAdvisor;

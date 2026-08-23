@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class SpringAIConfig {
 
-    @Bean
+    @Bean(name = "CommonchatClient")
     public ChatClient chatClient(ChatClient.Builder builder,MessageChatMemoryAdvisor messageChatMemoryAdvisor) {
         return builder
                 // 这只默认的系统消息

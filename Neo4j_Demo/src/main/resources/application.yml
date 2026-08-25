@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: neo4j
+  neo4j:
+    uri: bolt://192.168.74.100:7687 #本地虚拟机ubuntu ip地址+neo4j的端口号
+    authentication:
+      username: neo4j  # 用户名
+      password: 12345678 #密码
+  data:
+    neo4j:
+      database: neo4j

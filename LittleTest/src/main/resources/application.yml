@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: LittleTest
+  ai:
+    dashscope:
+      # 访问模型地址
+      base-url: https://dashscope.aliyuncs.com
+      # 访问模型的秘钥，也就是身份证明
+      api-key: ${Alibaba_Key} #在环境变量中配置了key，IDEA不会热加载，一定要重启！！！！太尼玛重要了
+      chat:
+        options:
+          # 模型名称
+          model: qwen3.7-max

@@ -1,5 +1,6 @@
 package com.cskaoyan.reactAgent.tool;
 
+import org.springframework.ai.tool.annotation.Tool;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -18,6 +19,7 @@ public class LibraryTools {
         /**
          * 查询所有图书
          */
+        @Tool(description = "查询图书馆的藏书信息")
         public String findAllBooks() {
             return String.join("\n", books);
         }
@@ -25,6 +27,7 @@ public class LibraryTools {
         /**
          * 根据关键词搜索图书
          */
+        @Tool(description = "根据关键词搜索图书")
         public String searchBooks(String keyword) {
             List<String> matched = books.stream()
                     .filter(book -> book.contains(keyword))

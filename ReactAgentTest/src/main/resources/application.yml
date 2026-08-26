@@ -3,15 +3,13 @@ spring:
   application:
     name: ReactAgentTest
 
-
-    openai:
-      base-url: https://api.deepseek.com
-      api-key: ${Deepseek_Key}
+  ai:
+    dashscope:
+      api-key: ${Alibaba_Key} #在环境变量中配置了key，IDEA不会热加载，一定要重启！！！！太尼玛重要了
+      base-url: https://dashscope.aliyuncs.com
       chat:
         options:
-          model: deepseek-v4-flash
-          temperature: 0.7
-
+          model: qwen3.7-max
 
 server:
   port: 8082

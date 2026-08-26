@@ -1,5 +1,4 @@
-server:
-  port: 8082
+
 spring:
   application:
     name: ReactAgentTest
@@ -11,3 +10,8 @@ spring:
       chat:
         options:
           model: deepseek-v4-flash
+          temperature: 0.7
+
+
+server:
+  port: 8082

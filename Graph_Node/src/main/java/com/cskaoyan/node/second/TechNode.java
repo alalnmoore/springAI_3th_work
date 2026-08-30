@@ -12,6 +12,7 @@ import java.util.Map;
 public class TechNode implements NodeAction {
     private ReactAgent reactAgent;
     public TechNode(ChatModel chatModel) {
+        //定义ReactAgent
         ReactAgent agent = ReactAgent.builder()
                 .name("tech_node")
                 .model(chatModel)
@@ -22,6 +23,7 @@ public class TechNode implements NodeAction {
 
     @Override
     public Map<String, Object> apply(OverAllState state) throws Exception {
+        //从map中查找key为"input"的值，也就是用户的输入的问题，交给agent回答，将结果再次存入map中
         String string = state.value("input")
                 .orElseThrow(() -> new RuntimeException("用户输入为空！！"))
                 .toString();

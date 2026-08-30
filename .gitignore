@@ -136,3 +136,5 @@ chroma/
 *.pid.lock
 node_modules/
 .cache/
+
+.gitignore

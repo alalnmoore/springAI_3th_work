@@ -70,6 +70,7 @@ public class Life_Tech_Test {
         Optional<OverAllState> result = compile.invoke(input, build);
         result.ifPresent(state->{
             String answer = state.value("answer")
+                    //如果map中没有这个key所对应的值，就返回异常
                     .orElseThrow(() -> new RuntimeException("answer not found"))
                     .toString();
             System.out.println(answer);

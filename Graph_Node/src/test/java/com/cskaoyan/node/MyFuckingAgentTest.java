@@ -26,8 +26,11 @@ public class MyFuckingAgentTest {
                 .build();
         Optional<OverAllState> invoke = myAgent.invoke(input, runnableConfig);
         invoke.ifPresent(state -> {
+            //查看key为answer的值有没有存在
             String ResultMessage = state.value("answer")
+                    //如果存在就返回，不存在就抛出异常
                     .orElseThrow(() -> new RuntimeException("No answer"))
+                    //将结果转换为字符串
                     .toString();
             System.out.println(ResultMessage);
         });

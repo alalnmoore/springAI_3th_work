@@ -9,4 +9,4 @@ spring:
         options:
           model: qwen3.7-max
 server:
-  port: 9898
+  port: 8080

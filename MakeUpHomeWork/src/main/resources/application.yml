@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: MakeUpHomeWork
+  ai:
+    dashscope:
+      api-key: ${Alibaba_Key}
+      base-url: https://dashscope.aliyuncs.com
+      chat:
+        options:
+          model: qwen3.7-max
+server:
+  port: 8085

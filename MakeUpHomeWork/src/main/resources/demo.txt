@@ -1,0 +1,110 @@
+公司有一个简单的报销审批流程。员工提交报销申请，系统先判断报销金额，如果金额较低则自动通过；如果金额较高，则需要人工审批。人工审批后，流程恢复执行并生成最终处理结果。
+
+流程要求：
+
+START
+  -> parse_expense
+  -> 条件边
+      金额 <= 1000：process_expense
+      金额 > 1000：wait_review
+  -> process_expense
+  -> END
+
+parse_expense 节点
+负责从用户输入中提取 报销原因 报销金额，将报销金额，报销原因，以及是否需要人工审核的结果放入OverAllState对象：
+
+wait_review 节点
+负责 HIL 人工审批。首次进入时中断流程，返回 { "type": "interrupt", "message": 报销原因+报销金额+提示输入approved 或rejected}
+
+同时，恢复执行时使用同一个 threadId
+process_expense 节点
+生成最终处理结果：读取OverAllState中的是否需要人工审核的结果，如果不需要则最终审核结果自动通过，否则如果需要人工审核，则读取OverAllState中的人工审核结果来决定到底审核通过还是不通过
+
+OverAllState中使用的各个字段如下：
+
+amount：报销金额，用于判断是否需要人工审批，也用于最终生成处理结果。
+
+reason：报销原因，用于人工审批提示，也用于最终生成处理结果。
+
+need_review：是否需要人工审核，parse_expense 根据报销金额写入，process_expense 根据它判断是自动通过还是读取人工审核结果。
+
+review_result：人工审核 结果，恢复执行时写入，例如 approved 或 rejected，用于决定高金额报销最终是否通过。
+
+process_status：最终处理状态，例如 AUTO_APPROVED、MANUAL_APPROVED、REJECTED。
+
+process_result：最终处理结果说明，返回给前端展示。
+
+
+
+请求示例如下：
+第一次请求：
+{
+  "threadId": "expense-001",
+  "amount": 2800,
+  "reason": "参加 Java 培训",
+  "resume": null
+}
+触发中断后的响应：
+
+{
+  "type": "interrupt",
+  "threadId": "expense-001",
+  "node": "wait_review",
+  "message": "该报销金额较高，需要人工审批，请输入 approved 或 rejected"
+}
+人工审批通过请求：
+
+{
+  "threadId": "expense-001",
+  "amount": null,
+  "reason": null,
+  "resume": "approved"
+}
+
+最终响应：
+
+{
+  "type": "normal",
+  "threadId": "expense-001",
+  "node": null,
+  "message": null,
+  "processStatus": "MANUAL_APPROVED",
+  "processResult": "报销申请已通过人工审批，进入财务打款流程。金额：2800.0，原因：参加 Java 培训"
+}
+
+处理报销请求的controller方法定义如下：
+@RestController
+@RequestMapping("/api/state-graph/expense")
+public class ExpenseGraphController {
+
+
+
+    @PostMapping("/chat")
+    public ExpenseChatResponse chat(@RequestBody ExpenseChatRequest request) {
+       return null;
+    }
+}
+
+@Data
+public class ExpenseChatResponse {
+
+    // 中断响应，或者普通响应
+    private String type;
+
+    private String threadId;
+
+    // 返回给前端的消息
+    private String message;
+}
+
+@Data
+public class ExpenseChatRequest {
+
+    private String threadId;
+    // 报销金额
+    private Double amount;
+    // 报销原因
+    private String reason;
+    // 用户针对人工审核消息的回复
+    private String resume;
+}

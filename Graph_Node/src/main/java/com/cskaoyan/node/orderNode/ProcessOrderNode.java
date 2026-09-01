@@ -16,7 +16,7 @@ public class ProcessOrderNode implements NodeAction {
 
         Map<String, Object> output = new HashMap<>();
 
-        // 高风险订单首次到达时还没有人工审核结果：生成给审核人员看的消息，随后由条件边进入中断节点
+        // 高风险订单经过人工审核后到达本节点：审核结果为拒绝时，终止履约
         if ("HIGH".equals(riskLevel) && reviewResult.contains("拒绝") || "HIGH".equals(riskLevel)  && reviewResult.toLowerCase().contains("reject")) {
             output.put("process_status", "REJECTED");
             output.put("process_result", "订单未通过人工审核，系统已取消后续履约。订单信息：" + orderInfo);
